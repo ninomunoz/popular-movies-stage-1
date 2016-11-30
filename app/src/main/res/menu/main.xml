@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- "Sort" icon should appear as action button if possible -->
+    <item
+        android:id="@+id/action_sort"
+        android:icon="@drawable/ic_sort_white_24px"
+        android:title="@string/sort"
+        app:showAsAction="ifRoom">
+        <menu>
+            <item
+                android:id="@+id/sort_by_popularity"
+                android:title="@string/popularity" />
+            <item
+                android:id="@+id/sort_by_rating"
+                android:title="@string/highest_rated" />
+        </menu>
+
+    </item>
+</menu>
