@@ -13,7 +13,7 @@ movie details.
 ## API Key:
 An API key for themoviedb.org is required to compile and run this application.
 Once you've obtained your key, you will need to add it to app/build.gradle
-under buildTypes. See example below, replacing <YOUR_API_KEY> with your key.
+under buildTypes. See example below, replacing `<YOUR_API_KEY>` with your key.
 
 **app/build.gradle**
 ```
