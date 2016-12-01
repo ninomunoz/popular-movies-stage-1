@@ -44,6 +44,15 @@ public class MoviePosterAdapter extends ArrayAdapter<Movie> {
         return convertView;
     }
 
+    public ArrayList<Movie> getMovies() {
+        ArrayList<Movie> movies = new ArrayList<Movie>();
+        for (int i = 0; i < getCount(); i++) {
+            movies.add(getItem(i));
+        }
+
+        return movies;
+    }
+
     // ViewHolder speeds up population of GridView by caching the imageView
     private static class ViewHolder {
         ImageView moviePoster;

@@ -42,8 +42,25 @@ public class MoviePosterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_poster);
 
+        mSharedPreferences = getSharedPreferences(getString(R.string.shared_preference_file_key), Context.MODE_PRIVATE);
+
+        if (savedInstanceState != null) {
+            ArrayList<Movie> movies = savedInstanceState.getParcelableArrayList("key");
+            mAdapter = new MoviePosterAdapter(this, movies);
+        }
+        else {
+            mAdapter = new MoviePosterAdapter(this, new ArrayList<Movie>());
+
+            // Retrieve sort preference
+            String sortBy = mSharedPreferences.getString(
+                    getString(R.string.sort_pref_key),
+                    getString(R.string.sort_by_popularity));
+
+            // Fetch movies according to sort pref
+            getMovies(sortBy);
+        }
+
         mGridView = (GridView) findViewById(R.id.gridview_movie_posters);
-        mAdapter = new MoviePosterAdapter(this, new ArrayList<Movie>());
         mGridView.setAdapter(mAdapter);
 
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -91,20 +108,9 @@ public class MoviePosterActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-
-        // Get shared preferences
-        if (mSharedPreferences == null) {
-            mSharedPreferences = this.getSharedPreferences(getString(R.string.shared_preference_file_key), Context.MODE_PRIVATE);
-        }
-
-        // Retrieve sort preference
-        String sortBy = mSharedPreferences.getString(
-                getString(R.string.sort_pref_key),
-                getString(R.string.sort_by_popularity));
-
-        getMovies(sortBy);
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putParcelableArrayList("key", mAdapter.getMovies());
+        super.onSaveInstanceState(outState);
     }
 
     void getMovies(String sortBy) {

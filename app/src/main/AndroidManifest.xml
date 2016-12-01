@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".MoviePosterActivity">
+        <activity android:name=".MoviePosterActivity"
+            android:launchMode="singleTop"> <!-- Prevents target task from re-creating this activity -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
