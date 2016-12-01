@@ -11,8 +11,6 @@ import com.squareup.picasso.Picasso;
 
 public class MovieDetailActivity extends AppCompatActivity {
 
-    static final String INTENT_TAG = "IntentTag";
-
     Movie currentMovie;
     ImageView thumbnail;
     TextView tvTitle;
@@ -26,7 +24,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_movie_detail);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        currentMovie = (Movie) getIntent().getParcelableExtra(INTENT_TAG);
+        currentMovie = (Movie) getIntent().getParcelableExtra(MoviePosterActivity.INTENT_EXTRA_MOVIE);
 
         thumbnail = (ImageView)findViewById(R.id.iv_movie_detail_thumbnail);
         tvTitle = (TextView)findViewById(R.id.tv_movie_detail_title);

@@ -31,7 +31,8 @@ import java.util.ArrayList;
 
 public class MoviePosterActivity extends AppCompatActivity {
 
-    final String INTENT_TAG = "IntentTag";
+    public static final String INTENT_EXTRA_MOVIE = "IntentExtraMovie";
+    private final String BUNDLE_MOVIES_KEY = "BundleMoviesKey";
 
     GridView mGridView;
     MoviePosterAdapter mAdapter;
@@ -45,7 +46,7 @@ public class MoviePosterActivity extends AppCompatActivity {
         mSharedPreferences = getSharedPreferences(getString(R.string.shared_preference_file_key), Context.MODE_PRIVATE);
 
         if (savedInstanceState != null) {
-            ArrayList<Movie> movies = savedInstanceState.getParcelableArrayList("key");
+            ArrayList<Movie> movies = savedInstanceState.getParcelableArrayList(BUNDLE_MOVIES_KEY);
             mAdapter = new MoviePosterAdapter(this, movies);
         }
         else {
@@ -68,7 +69,7 @@ public class MoviePosterActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Movie movie = mAdapter.getItem(position);
                 Intent intent = new Intent(MoviePosterActivity.this, MovieDetailActivity.class);
-                intent.putExtra(INTENT_TAG, movie);
+                intent.putExtra(INTENT_EXTRA_MOVIE, movie);
                 startActivity(intent);
             }
         });
@@ -109,7 +110,7 @@ public class MoviePosterActivity extends AppCompatActivity {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        outState.putParcelableArrayList("key", mAdapter.getMovies());
+        outState.putParcelableArrayList(BUNDLE_MOVIES_KEY, mAdapter.getMovies());
         super.onSaveInstanceState(outState);
     }
 
