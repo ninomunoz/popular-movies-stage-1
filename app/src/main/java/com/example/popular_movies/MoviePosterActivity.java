@@ -45,7 +45,7 @@ public class MoviePosterActivity extends AppCompatActivity {
 
         mSharedPreferences = getSharedPreferences(getString(R.string.shared_preference_file_key), Context.MODE_PRIVATE);
 
-        if (savedInstanceState != null) {
+        if (savedInstanceState != null && savedInstanceState.containsKey(BUNDLE_MOVIES_KEY)) {
             ArrayList<Movie> movies = savedInstanceState.getParcelableArrayList(BUNDLE_MOVIES_KEY);
             mAdapter = new MoviePosterAdapter(this, movies);
         }
