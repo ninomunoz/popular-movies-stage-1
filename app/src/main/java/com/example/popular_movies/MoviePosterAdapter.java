@@ -39,7 +39,11 @@ public class MoviePosterAdapter extends ArrayAdapter<Movie> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        Picasso.with(getContext()).load(movie.posterPath).into(viewHolder.moviePoster);
+        Picasso.with(getContext())
+                .load(movie.posterPath)
+                .placeholder(R.drawable.ic_placeholder)
+                .error(R.drawable.ic_error)
+                .into(viewHolder.moviePoster);
 
         return convertView;
     }
