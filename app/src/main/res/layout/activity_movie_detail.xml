@@ -1,53 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_movie_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:orientation="horizontal"
     tools:context="com.example.popular_movies.MovieDetailActivity">
-
-    <LinearLayout android:id="@+id/ll_movie_detail_container"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/detail_padding"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
 
-        <ImageView android:id="@+id/iv_movie_detail_thumbnail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <LinearLayout
+        <LinearLayout android:id="@+id/ll_movie_detail_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/detail_padding"
-            android:orientation="vertical">
+            android:paddingBottom="@dimen/detail_padding"
+            android:orientation="horizontal">
 
-            <TextView android:id="@+id/tv_movie_detail_title"
-                style="@style/MovieDetail.Title" />
+            <ImageView android:id="@+id/iv_movie_detail_thumbnail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-            <TextView android:id="@+id/tv_movie_detail_release_date"
-                style="@style/MovieDetail.ReleaseDate" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/detail_padding"
+                android:orientation="vertical">
 
-            <TextView android:id="@+id/tv_movie_detail_rating"
-                android:paddingTop="@dimen/detail_padding"
-                style="@style/MovieDetail" />
+                <TextView android:id="@+id/tv_movie_detail_title"
+                    style="@style/MovieDetail.Title" />
+
+                <TextView android:id="@+id/tv_movie_detail_release_date"
+                    style="@style/MovieDetail.ReleaseDate" />
+
+                <TextView android:id="@+id/tv_movie_detail_rating"
+                    android:paddingTop="@dimen/detail_padding"
+                    style="@style/MovieDetail" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
 
-    <TextView android:id="@+id/tv_movie_detail_synopsis_lbl"
-        style="@style/MovieDetail.Label"
-        android:text="@string/synopsis"
-        android:paddingTop="@dimen/detail_padding"
-        android:layout_below="@id/ll_movie_detail_container" />
+        <TextView android:id="@+id/tv_movie_detail_synopsis_lbl"
+            style="@style/MovieDetail.Label"
+            android:text="@string/synopsis"
+            android:paddingTop="@dimen/detail_padding"
+            android:layout_below="@id/ll_movie_detail_container" />
 
-    <TextView android:id="@+id/tv_movie_detail_synopsis"
-        style="@style/MovieDetail"
-        android:paddingTop="@dimen/detail_padding"
-        android:layout_below="@id/tv_movie_detail_synopsis_lbl" />
+        <TextView android:id="@+id/tv_movie_detail_synopsis"
+            style="@style/MovieDetail"
+            android:paddingTop="@dimen/detail_padding"
+            android:layout_below="@id/tv_movie_detail_synopsis_lbl" />
+    </RelativeLayout>
 
-</RelativeLayout>
+</ScrollView>
