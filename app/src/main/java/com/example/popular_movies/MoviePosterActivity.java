@@ -9,19 +9,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnItemClick;
 
 public class MoviePosterActivity extends AppCompatActivity implements FetchMovieTask.IAsyncTaskCompleteListener {
 
     public static final String INTENT_EXTRA_MOVIE = "IntentExtraMovie";
     private final String BUNDLE_MOVIES_KEY = "BundleMoviesKey";
 
-    GridView mGridView;
+    @BindView(R.id.gridview_movie_posters) GridView mGridView;
+
     MoviePosterAdapter mAdapter;
     SharedPreferences mSharedPreferences;
 
@@ -29,6 +32,7 @@ public class MoviePosterActivity extends AppCompatActivity implements FetchMovie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_poster);
+        ButterKnife.bind(this);
 
         mSharedPreferences = getSharedPreferences(getString(R.string.shared_preference_file_key), Context.MODE_PRIVATE);
 
@@ -48,18 +52,15 @@ public class MoviePosterActivity extends AppCompatActivity implements FetchMovie
             getMovies(sortBy);
         }
 
-        mGridView = (GridView) findViewById(R.id.gridview_movie_posters);
         mGridView.setAdapter(mAdapter);
+    }
 
-        mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                Movie movie = mAdapter.getItem(position);
-                Intent intent = new Intent(MoviePosterActivity.this, MovieDetailActivity.class);
-                intent.putExtra(INTENT_EXTRA_MOVIE, movie);
-                startActivity(intent);
-            }
-        });
+    @OnItemClick(R.id.gridview_movie_posters)
+    void onItemClick(int position) {
+        Movie movie = mAdapter.getItem(position);
+        Intent intent = new Intent(MoviePosterActivity.this, MovieDetailActivity.class);
+        intent.putExtra(INTENT_EXTRA_MOVIE, movie);
+        startActivity(intent);
     }
 
     @Override

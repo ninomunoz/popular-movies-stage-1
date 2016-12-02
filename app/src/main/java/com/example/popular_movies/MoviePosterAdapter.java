@@ -11,6 +11,9 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by i57198 on 11/23/16.
  */
@@ -22,21 +25,20 @@ public class MoviePosterAdapter extends ArrayAdapter<Movie> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View view, ViewGroup parent) {
 
         Movie movie = getItem(position);
         ViewHolder viewHolder;
 
         // Check if an existing view is being reused, otherwise inflate the view
-        if (convertView == null) {
-            viewHolder = new ViewHolder();
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_item_movie_poster, parent, false);
-            viewHolder.moviePoster = (ImageView) convertView.findViewById(R.id.iv_movie_poster);
-            convertView.setTag(viewHolder); // attach viewHolder object to View
+        if (view == null) {
+            view = LayoutInflater.from(getContext()).inflate(R.layout.list_item_movie_poster, parent, false);
+            viewHolder = new ViewHolder(view);
+            view.setTag(viewHolder); // attach viewHolder object to View
         }
         else {
             // View is being recycled, retrieve the viewHolder object from tag
-            viewHolder = (ViewHolder) convertView.getTag();
+            viewHolder = (ViewHolder) view.getTag();
         }
 
         Picasso.with(getContext())
@@ -45,7 +47,7 @@ public class MoviePosterAdapter extends ArrayAdapter<Movie> {
                 .error(R.drawable.ic_error)
                 .into(viewHolder.moviePoster);
 
-        return convertView;
+        return view;
     }
 
     public ArrayList<Movie> getMovies() {
@@ -58,7 +60,11 @@ public class MoviePosterAdapter extends ArrayAdapter<Movie> {
     }
 
     // ViewHolder speeds up population of GridView by caching the imageView
-    private static class ViewHolder {
-        ImageView moviePoster;
+    static class ViewHolder {
+        @BindView(R.id.iv_movie_poster) ImageView moviePoster;
+
+        public ViewHolder(View view) {
+            ButterKnife.bind(this, view);
+        }
     }
 }

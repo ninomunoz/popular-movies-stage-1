@@ -9,28 +9,27 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MovieDetailActivity extends AppCompatActivity {
 
     Movie currentMovie;
-    ImageView thumbnail;
-    TextView tvTitle;
-    TextView tvReleaseDate;
-    TextView tvRating;
-    TextView tvSynopsis;
+
+    @BindView(R.id.iv_movie_detail_thumbnail) ImageView thumbnail;
+    @BindView(R.id.tv_movie_detail_title) TextView tvTitle;
+    @BindView(R.id.tv_movie_detail_release_date) TextView tvReleaseDate;
+    @BindView(R.id.tv_movie_detail_rating) TextView tvRating;
+    @BindView(R.id.tv_movie_detail_synopsis) TextView tvSynopsis;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
+        ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         currentMovie = (Movie) getIntent().getParcelableExtra(MoviePosterActivity.INTENT_EXTRA_MOVIE);
-
-        thumbnail = (ImageView)findViewById(R.id.iv_movie_detail_thumbnail);
-        tvTitle = (TextView)findViewById(R.id.tv_movie_detail_title);
-        tvReleaseDate = (TextView)findViewById(R.id.tv_movie_detail_release_date);
-        tvRating = (TextView)findViewById(R.id.tv_movie_detail_rating);
-        tvSynopsis = (TextView)findViewById(R.id.tv_movie_detail_synopsis);
 
         loadData();
     }
